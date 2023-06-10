@@ -1,5 +1,5 @@
 {
-  "name": "@phoenix741/cache-manager-fs-binary",
+  "name": "cache-manager-fs-stream",
   "version": "2.0.0",
   "description": "file system store for node cache manager with binary data as files",
   "keywords": [
