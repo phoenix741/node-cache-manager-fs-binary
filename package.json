@@ -1,6 +1,6 @@
 {
   "name": "@phoenix741/cache-manager-fs-binary",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "file system store for node cache manager with binary data as files",
   "keywords": [
     "cache-manager",
