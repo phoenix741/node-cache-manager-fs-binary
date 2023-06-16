@@ -30,6 +30,7 @@
   "author": "Ulrich Vandenhekke (based on code of Ilya Sheershoff)",
   "license": "MIT",
   "dependencies": {
+    "is-stream": "^3.0.0",
     "uuid": "^9.0.0"
   },
   "peerDependencies": {
