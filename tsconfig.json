@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "lib": ["esnext"],
-    "module": "commonjs",
+    "lib": [
+      "esnext"
+    ],
+    "module": "node16",
     "target": "ES2015",
     "strict": true,
     "esModuleInterop": true,
@@ -11,5 +13,7 @@
     "incremental": true,
     "downlevelIteration": true
   },
-  "exclude": ["dist"]
+  "exclude": [
+    "dist"
+  ]
 }

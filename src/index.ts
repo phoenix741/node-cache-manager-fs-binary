@@ -1,9 +1,8 @@
 import type { Cache, Milliseconds, Store } from 'cache-manager';
 import { createReadStream, createWriteStream } from 'fs';
 import { mkdir, readFile, readdir, stat, writeFile } from 'fs/promises';
-import * as isStream from 'is-stream';
 import { join } from 'path';
-import { Readable } from 'stream';
+import { Stream, Readable as ReadableStream, Readable } from 'stream';
 import { pipeline as pipelinePromise } from 'stream/promises';
 import { promisify } from 'util';
 import * as uuid from 'uuid';
@@ -130,10 +129,10 @@ export class DiskStore implements Store {
     });
 
     let binarySize = 0;
-    if (val instanceof Buffer || isStream.readable(val)) {
+    if (val instanceof Buffer || isReadableStream(val)) {
       // If the value is buffer or readable, we store it in a separate file
 
-      const stream = isStream.readable(val) ? val : Readable.from(val);
+      const stream = isReadableStream(val) ? val : Readable.from(val);
 
       // put storage filenames into stored value.binary object
       metadata.binaryFilename = calculateBinaryFilename(metadata.filename);
@@ -388,4 +387,22 @@ export type DiskStoreCache = Cache<DiskStore>;
 
 export function create(args: Partial<DiskStoreOptions> = {}) {
   return new DiskStore(args);
+}
+
+export function isStream(stream: unknown): stream is Stream {
+  return (
+    stream !== null &&
+    typeof stream === 'object' &&
+    typeof (stream as Stream).pipe === 'function'
+  );
+}
+
+export function isReadableStream(stream: unknown): stream is ReadableStream {
+  return (
+    isStream(stream) &&
+    (stream as ReadableStream).readable !== false &&
+    typeof (stream as ReadableStream)._read === 'function' &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    typeof (stream as any)._readableState === 'object'
+  );
 }

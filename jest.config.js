@@ -2,4 +2,5 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  transformIgnorePatterns: ['node_modules/is-stream/index.js'],
 };
