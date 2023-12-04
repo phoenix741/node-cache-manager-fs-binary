@@ -312,12 +312,12 @@ export class DiskStore implements Store {
     for (const file of files) {
       if (!/\.dat$/.test(file)) {
         // only .dat files, no .bin files read
-        return;
+        continue;
       }
 
       const filename = join(this.options.path, file);
       if (!(await exists(filename))) {
-        return;
+        continue;
       }
 
       try {
